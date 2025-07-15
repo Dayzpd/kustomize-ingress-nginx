@@ -1,2 +1,2 @@
-# Calico CNI
-Repo for managing the configuration of calico-cni across my homelab clusters.
+# Ingress Nginx
+Repo for managing the configuration of ingress-nginx across my homelab clusters.
