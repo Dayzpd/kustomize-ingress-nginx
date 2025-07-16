@@ -4,3 +4,26 @@ kind: Kustomization
 namespace: ingress-nginx
 resources:
 - ../../bases/v1.12.3
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/type
+      value: LoadBalancer
+    - op: add
+      path: /spec/loadBalancerIP
+      value: 10.202.76.100
+  target:
+    kind: Service
+    version: v1
+    name: ingress-nginx-controller
+    namespace: ingress-nginx
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: "--publish-status-address=10.202.76.100"
+  target:
+    kind: Deployment
+    group: apps
+    version: v1
+    name: ingress-nginx-controller
+    namespace: ingress-nginx
